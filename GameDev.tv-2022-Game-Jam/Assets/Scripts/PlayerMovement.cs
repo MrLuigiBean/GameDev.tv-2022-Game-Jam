@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	public float movementSpeed;
+	// public SpriteRenderer sr;
 
 	// Start is called before the first frame update
 	//void Start()
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
 			movement += Vector2.right;
+			// sr.flipX = !sr.flipX;
+
 		}
 
 		if (movement != Vector2.zero)
