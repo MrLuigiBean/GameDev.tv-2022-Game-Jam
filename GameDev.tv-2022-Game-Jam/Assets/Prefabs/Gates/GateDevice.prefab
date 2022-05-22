@@ -181,14 +181,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1210844a76d43a14bb73fcf4bac1a8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeviceEnd: {fileID: 2881247391321703127}
-  RedGatePrefab: {fileID: 7584730125976444239, guid: d7551d2910b36124ab361a5d5d89ed46, type: 3}
-  GreenGatePrefab: {fileID: 3380346091662711222, guid: 00403898e07d8ea4ba584054acd1641a, type: 3}
-  GateObject: {fileID: 0}
-  GateType: 0
-  Activation: 0
-  GateDistance: {x: 0, y: 0, z: 0}
-  GateScale: {x: 0, y: 0, z: 0}
+  deviceEnd: {fileID: 2881247391321703127}
+  redGatePrefab: {fileID: 7584730125976444239, guid: d7551d2910b36124ab361a5d5d89ed46, type: 3}
+  greenGatePrefab: {fileID: 3380346091662711222, guid: 00403898e07d8ea4ba584054acd1641a, type: 3}
+  gateObject: {fileID: 0}
+  gateType: 0
+  activation: 0
+  gateDistance: {x: 0, y: 0, z: 0}
+  gateScale: {x: 0, y: 0, z: 0}
 --- !u!95 &-5615084136236366783
 Animator:
   serializedVersion: 3

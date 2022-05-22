@@ -6,68 +6,76 @@ public class GateDeviceBehaviour : MonoBehaviour
 {
     // Declare References
     [Header("References")]
-    [SerializeField] private GameObject DeviceEnd;
-    [SerializeField] private GameObject RedGatePrefab;
-    [SerializeField] private GameObject GreenGatePrefab;
+    [SerializeField] private GameObject deviceEnd;
+    [SerializeField] private GameObject redGatePrefab;
+    [SerializeField] private GameObject greenGatePrefab;
+    [SerializeField] private GameObject playerHandler;
 
     // Declare variables
     [SerializeField] private enum GateTypes { Red, Green };
     [Header("Gate Variables")]
-    [SerializeField] private GameObject GateObject;
-    [SerializeField] private GateTypes GateType = GateTypes.Red;
-    [SerializeField] private bool Activation = false;
-    [SerializeField] private Vector3 GateDistance = new Vector3(0, 0, 0);
-    [SerializeField] private Vector3 GateScale = new Vector3(0, 0, 0);
+    [SerializeField] private GameObject gateObject;
+    [SerializeField] private GateTypes gateType = GateTypes.Red;
+    [SerializeField] private bool activation = false;
+    [SerializeField] private Vector3 gateDistance = new Vector3(0, 0, 0);
+    [SerializeField] private Vector3 gateScale = new Vector3(0, 0, 0);
 
     // Start is called before the first frame update
     void Start()
     {
         // Ensure all references are present
-        if (DeviceEnd == null)
-            Debug.LogError("[GateDeviceBehaviour.cs] ERROR! DeviceEnd is null!");
-        if (RedGatePrefab == null)
-            Debug.LogError("[GateDeviceBehaviour.cs] ERROR! RedGatePrefab is null!");
-        if (GreenGatePrefab == null)
-            Debug.LogError("[GateDeviceBehaviour.cs] ERROR! GreenGatePrefab is null!");
+        if (deviceEnd == null)
+            Debug.LogError("[GateDeviceBehaviour.cs] ERROR! deviceEnd is null!");
+        if (redGatePrefab == null)
+            Debug.LogError("[GateDeviceBehaviour.cs] ERROR! redGatePrefab is null!");
+        if (greenGatePrefab == null)
+            Debug.LogError("[GateDeviceBehaviour.cs] ERROR! greenGatePrefab is null!");
+
+        // Get playerHandler manually (Since it is not a prefab)
+        playerHandler = GameObject.Find("PlayerHandler");
     }
 
     // Update is called once per frame
     void Update()
     {
         // Activate Gate
-        if (Activation && GateObject == null)
+        if (activation && gateObject == null)
         {
             // Update Animation
             GetComponent<Animator>().SetBool("isActivated", true);
 
             // Calculate Gate Distance
-            GateDistance = (DeviceEnd.transform.position - transform.position) / 2;
-            GateScale = new Vector3(1, 1, 0) + GateDistance * 1.9f;
-            GameObject Gate = RedGatePrefab;
+            gateDistance = (deviceEnd.transform.position - transform.position) / 2;
+            gateScale = new Vector3(1, 1, 0) + gateDistance * 1.9f;
 
             // Check Gate Type
-            if (GateType == GateTypes.Red)
-                Gate = RedGatePrefab;
-            else if (GateType == GateTypes.Green)
-                Gate = GreenGatePrefab;
+            if (gateType == GateTypes.Red)
+            {
+                gateObject = Instantiate(redGatePrefab, transform.position + gateDistance, transform.rotation, transform);
+                gateObject.GetComponent<BoxCollider2D>().isTrigger = (playerHandler.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human);
+            }
+            else if (gateType == GateTypes.Green)
+            {
+                gateObject = Instantiate(greenGatePrefab, transform.position + gateDistance, transform.rotation, transform);
+                gateObject.GetComponent<BoxCollider2D>().isTrigger = (playerHandler.GetComponent<PlayerStates>().currentPlayerState != PlayerStates.PlayerExistence.Human);
+            }
 
-            GateObject = Instantiate(Gate, transform.position + GateDistance, transform.rotation, transform);
-            GateObject.transform.localScale = GateScale;
-            GateObject.transform.localRotation = transform.rotation;
+            gateObject.transform.localScale = gateScale;
+            gateObject.transform.localRotation = transform.rotation;
         }
         // Deactivate Gate
-        else if (!Activation && GateObject != null)
+        else if (!activation && gateObject != null)
         {
             // Update Animation
             GetComponent<Animator>().SetBool("isActivated", false);
 
-            Destroy(GateObject);
-            GateObject = null;
+            Destroy(gateObject);
+            gateObject = null;
         }
     }
 
     public void ToggleGate()
     {
-        Activation = !Activation;
+        activation = !activation;
     }
 }

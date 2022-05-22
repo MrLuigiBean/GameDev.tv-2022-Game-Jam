@@ -6,7 +6,7 @@ public class SwitchManager : MonoBehaviour
 {
 	// Declare References
 	[Header("References")]
-	[SerializeField] private GameObject ConnectedDevice;
+	[SerializeField] private GameObject connectedDevice;
 
 
 	public bool isPressed;
@@ -32,8 +32,8 @@ public class SwitchManager : MonoBehaviour
 			Debug.Log("we made it!");
 
 			// Activate Device
-			if (ConnectedDevice.GetComponent<GateDeviceBehaviour>())
-				ConnectedDevice.GetComponent<GateDeviceBehaviour>().ToggleGate();
+			if (connectedDevice.GetComponent<GateDeviceBehaviour>())
+				connectedDevice.GetComponent<GateDeviceBehaviour>().ToggleGate();
 		}
 	}
 }

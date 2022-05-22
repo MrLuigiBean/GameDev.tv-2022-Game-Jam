@@ -9,8 +9,12 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject humanGO, ghostGO;
 	private Rigidbody2D humanRB, ghostRB;
 
-    // Start is called before the first frame update
-    void Start()
+	void Awake()
+	{
+		//this.GetComponent<PlayerStates>().currentPlayerState;
+	}
+
+    private void Start()
     {
 		humanRB = humanGO.GetComponent<Rigidbody2D>();
 		ghostRB = ghostGO.GetComponent<Rigidbody2D>();
@@ -43,17 +47,17 @@ public class PlayerMovement : MonoBehaviour
 		{
 			movement.Normalize();
 			movement = movementSpeed * Time.deltaTime * movement;
-			if (this.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Human)
+			if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
 			{
 				humanRB.MovePosition(humanRB.position + movement);
 			}
-			if (this.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Ghost)
+			if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
 			{
 				ghostRB.MovePosition(ghostRB.position + movement);
 			}
 		}
 
-		if (this.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Human)
+		if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
 		{
 			ghostGO.transform.position = humanGO.transform.position;
 		}

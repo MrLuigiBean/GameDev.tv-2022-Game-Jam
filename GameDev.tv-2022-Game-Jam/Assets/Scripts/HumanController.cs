@@ -21,18 +21,18 @@ public class HumanController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //If human form
-        if (playerHandler.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Human)
+        if (playerHandler.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
         {
             // Win Game [ONLY in Human Form AND TheOverseer exists]
-            if (playerHandler.GetComponent<PlayerStates>().List_Win.Contains(collision.tag) && playerHandler.GetComponent<PlayerStates>().TheOverseer != null)
+            if (playerHandler.GetComponent<PlayerStates>().list_Win.Contains(collision.tag) && playerHandler.GetComponent<PlayerStates>().theOverseer != null)
             {
-                playerHandler.GetComponent<PlayerStates>().TheOverseer.GetComponent<OverseerBehaviour>().CompleteLevel();
+                playerHandler.GetComponent<PlayerStates>().theOverseer.GetComponent<OverseerBehaviour>().CompleteLevel();
                 Debug.Log("You WIN!");
             }
             //Kill players
-            if (playerHandler.GetComponent<PlayerStates>().List_Human_Lethal.Contains(collision.tag))
+            if (playerHandler.GetComponent<PlayerStates>().list_Human_Lethal.Contains(collision.tag))
             {
-                playerHandler.GetComponent<PlayerStates>().CurrentPlayerState = PlayerStates.PlayerExistance.Ghost;
+                playerHandler.GetComponent<PlayerStates>().ChangeExistence(PlayerStates.PlayerExistence.Ghost);
                 Debug.Log("Oooooo.... I'm a Ghost....");
             }
         }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class OverseerBehaviour : MonoBehaviour
 {
     [Header("Game State")]
-    [SerializeField] private int Level = 0;
-    [SerializeField] private bool Completion = false;
+    [SerializeField] private int level = 0;
+    [SerializeField] private bool completion = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class OverseerBehaviour : MonoBehaviour
     // Function to run after completing a level
     public void CompleteLevel()
     {
-        Completion = true;
+        completion = true;
 
         // To Add [Events after completing level (Ex. Victory UI, etc)]
     }
