@@ -5,12 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Lethal Terrain
-<<<<<<< Updated upstream
   - Switch
-=======
-  - RedGate
-  - GreenGate
->>>>>>> Stashed changes
+  - Red Gate
+  - Green Gate
   layers:
   - Default
   - TransparentFX

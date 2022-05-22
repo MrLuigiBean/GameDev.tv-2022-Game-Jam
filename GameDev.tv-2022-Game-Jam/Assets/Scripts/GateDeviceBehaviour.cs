@@ -37,6 +37,9 @@ public class GateDeviceBehaviour : MonoBehaviour
         // Activate Gate
         if (Activation && GateObject == null)
         {
+            // Update Animation
+            GetComponent<Animator>().SetBool("isActivated", true);
+
             // Calculate Gate Distance
             GateDistance = (DeviceEnd.transform.position - transform.position) / 2;
             GateScale = new Vector3(1, 1, 0) + GateDistance * 1.9f;
@@ -55,6 +58,9 @@ public class GateDeviceBehaviour : MonoBehaviour
         // Deactivate Gate
         else if (!Activation && GateObject != null)
         {
+            // Update Animation
+            GetComponent<Animator>().SetBool("isActivated", false);
+
             Destroy(GateObject);
             GateObject = null;
         }

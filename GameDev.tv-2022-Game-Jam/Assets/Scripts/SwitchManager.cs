@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SwitchManager : MonoBehaviour
 {
+	// Declare References
+	[Header("References")]
+	[SerializeField] private GameObject ConnectedDevice;
+
+
 	public bool isPressed;
 
 	// Start is called before the first frame update
@@ -23,7 +28,12 @@ public class SwitchManager : MonoBehaviour
 		if (collision.tag == "Player")
 		{
 			isPressed = true;
+
 			Debug.Log("we made it!");
+
+			// Activate Device
+			if (ConnectedDevice.GetComponent<GateDeviceBehaviour>())
+				ConnectedDevice.GetComponent<GateDeviceBehaviour>().ToggleGate();
 		}
 	}
 }
