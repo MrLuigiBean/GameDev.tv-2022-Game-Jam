@@ -21,7 +21,7 @@ public class PlayerStates : MonoBehaviour
     void Start()
     {
         if (TheOverseer == null)
-            Debug.Log("[PlayerStates.cs] ERROR! TheOverseer is null! Please reference to the Overseer for functions to work!");
+            Debug.LogError("[PlayerStates.cs] ERROR! TheOverseer is null! Please reference to the Overseer for functions to work!");
     }
 
     // Update is called once per frame
