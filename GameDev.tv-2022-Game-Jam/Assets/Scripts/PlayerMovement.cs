@@ -17,23 +17,21 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		Vector2 movement = Vector2.zero;
-		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+		if (Input.GetAxis("Vertical") > 0)
 		{
 			movement += Vector2.up;
 		}
-		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+		if (Input.GetAxis("Vertical") < 0)
 		{
 			movement += Vector2.down;
 		}
-		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+		if (Input.GetAxis("Horizontal") < 0)
 		{
 			movement += Vector2.left;
 		}
-		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+		if (Input.GetAxis("Horizontal") > 0)
 		{
 			movement += Vector2.right;
-			// sr.flipX = !sr.flipX;
-
 		}
 
 		if (movement != Vector2.zero)
