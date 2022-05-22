@@ -6,21 +6,18 @@ public class PlayerMovement : MonoBehaviour
 {
 	public float movementSpeed;
 	// public SpriteRenderer sr;
-	[SerializeField]
-	public GameObject GO_human, GO_ghost;
+	public GameObject humanGO, ghostGO;
+	private Rigidbody2D humanRB, ghostRB;
 
-	void Awake()
-	{
-		//this.GetComponent<PlayerStates>().CurrentPlayerState;
+    // Start is called before the first frame update
+    void Start()
+    {
+		humanRB = humanGO.GetComponent<Rigidbody2D>();
+		ghostRB = ghostGO.GetComponent<Rigidbody2D>();
 	}
-	// Start is called before the first frame update
-	//void Start()
-	//{
 
-	//}
-
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    void Update()
 	{
 		Vector2 movement = Vector2.zero;
 		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
@@ -48,17 +45,17 @@ public class PlayerMovement : MonoBehaviour
 			movement = movementSpeed * Time.deltaTime * movement;
 			if (this.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Human)
 			{
-				GO_human.transform.Translate(movement, Space.World);
+				humanRB.MovePosition(humanRB.position + movement);
 			}
 			if (this.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Ghost)
 			{
-				GO_ghost.transform.Translate(movement, Space.World);
+				ghostRB.MovePosition(ghostRB.position + movement);
 			}
 		}
 
 		if (this.GetComponent<PlayerStates>().CurrentPlayerState == PlayerStates.PlayerExistance.Human)
 		{
-			GO_ghost.transform.position = GO_human.transform.position;
+			ghostGO.transform.position = humanGO.transform.position;
 		}
 	}
 }

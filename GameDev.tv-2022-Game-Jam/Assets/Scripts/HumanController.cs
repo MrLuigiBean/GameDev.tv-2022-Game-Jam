@@ -5,6 +5,7 @@ using UnityEngine;
 public class HumanController : MonoBehaviour
 {
     [SerializeField] public GameObject playerHandler;
+    [HideInInspector] public bool isJumping;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +36,6 @@ public class HumanController : MonoBehaviour
                 Debug.Log("Oooooo.... I'm a Ghost....");
             }
         }
+        
     }
 }
