@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 	// public SpriteRenderer sr;
 	public GameObject humanGO, ghostGO;
 	private Rigidbody2D humanRB, ghostRB;
+	private bool isJumpable;
 
 	void Awake()
 	{
@@ -23,15 +24,31 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
+		isJumpable = humanGO.GetComponent<HumanController>().jumpable;
 		Vector2 movement = Vector2.zero;
-		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-		{
-			movement += Vector2.up;
+		if(this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
+        {
+			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+			{
+				movement += Vector2.up;
+			}
+			if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+			{
+				movement += Vector2.down;
+			}
 		}
-		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-		{
-			movement += Vector2.down;
-		}
+		else
+        {
+			if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)) && isJumpable)
+            {
+				//movement += new Vector2(0,200);
+				Debug.Log("jump");
+				//humanRB.MovePosition
+				//humanGO.transform.Translate(new Vector3(0, 5));
+
+			}
+        }
+
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
 			movement += Vector2.left;

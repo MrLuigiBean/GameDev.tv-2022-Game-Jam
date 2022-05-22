@@ -552,6 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHandler: {fileID: 738458628}
+  isJumping: 0
 --- !u!50 &531754613
 Rigidbody2D:
   serializedVersion: 4
@@ -848,8 +849,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10.5
-  GO_human: {fileID: 531754611}
-  GO_ghost: {fileID: 990971563}
+  humanGO: {fileID: 531754611}
+  ghostGO: {fileID: 990971563}
 --- !u!4 &738458631
 Transform:
   m_ObjectHideFlags: 0

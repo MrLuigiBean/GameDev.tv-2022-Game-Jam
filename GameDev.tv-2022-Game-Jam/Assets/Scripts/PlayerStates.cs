@@ -76,7 +76,7 @@ public class PlayerStates : MonoBehaviour
 
         // Change Passable for Ghost
         // Platforms
-        GameObject[] allPlatforms = GameObject.FindGameObjectsWithTag("Platform");
+        GameObject[] allPlatforms = GameObject.FindGameObjectsWithTag("Platforms");
         foreach (GameObject GO in allPlatforms)
         {
             // Make all green gates passable for ghost, not human

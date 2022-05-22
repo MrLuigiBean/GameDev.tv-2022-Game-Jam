@@ -5,10 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Switch
-  - Lethal Terrain
-  - Green Gate
   - Red Gate
-  - Platform
+  - Green Gate
+  - Lethal Terrain
+  - Platforms
   layers:
   - Default
   - TransparentFX

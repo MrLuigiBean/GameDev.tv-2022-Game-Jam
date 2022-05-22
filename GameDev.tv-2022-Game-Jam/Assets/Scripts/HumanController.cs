@@ -5,7 +5,7 @@ using UnityEngine;
 public class HumanController : MonoBehaviour
 {
     [SerializeField] public GameObject playerHandler;
-    [HideInInspector] public bool isJumping;
+    [HideInInspector] public bool jumpable = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +35,19 @@ public class HumanController : MonoBehaviour
                 playerHandler.GetComponent<PlayerStates>().ChangeExistence(PlayerStates.PlayerExistence.Ghost);
                 Debug.Log("Oooooo.... I'm a Ghost....");
             }
+            
         }
-        
+        //Jump
+        if (collision.gameObject.tag == "Platforms")
+        {
+            jumpable = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Platforms")
+        {
+            jumpable = false;
+        }
     }
 }
