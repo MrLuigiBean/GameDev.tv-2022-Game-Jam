@@ -9,6 +9,7 @@ TagManager:
   - Green Gate
   - Lethal Terrain
   - Platforms
+  - Solid Platforms
   layers:
   - Default
   - TransparentFX

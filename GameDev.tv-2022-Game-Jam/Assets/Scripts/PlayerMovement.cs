@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public float movementSpeed;
 	// public SpriteRenderer sr;
 	public GameObject humanGO, ghostGO;
 	private Rigidbody2D humanRB, ghostRB;
 	private bool isJumpable;
+	[SerializeField] Vector2 movement = Vector2.zero;
+	[SerializeField] private float movementAcceleration = 0.001f ;
+	[SerializeField] private float movementSpeedCap = 1.0f ;
+	[SerializeField] public float movementSpeed = 2.0f;
+
+	[SerializeField] private float humanJumpY = 0.0f;
+	[SerializeField] private bool humanHasJump = false;
+	[SerializeField] private float humanJumpCap = 1.0f;
 
 	void Awake()
 	{
@@ -25,23 +32,28 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		isJumpable = humanGO.GetComponent<HumanController>().jumpable;
-		Vector2 movement = Vector2.zero;
+		//movement = Vector2.zero;
+		
 		if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
 		{
-			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+			if (movement.y < movementSpeedCap && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
 			{
-				movement += Vector2.up;
+				movement += new Vector2(0, movementAcceleration);
+				//movement += Vector2.up;
 			}
-			if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+			if (movement.y > -movementSpeedCap && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
 			{
-				movement += Vector2.down;
+				movement += new Vector2(0, -movementAcceleration);
+				//movement += Vector2.down;
 			}
 		}
 		else
 		{
-			if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)) && isJumpable)
+			if (!humanHasJump && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && humanGO.GetComponent<Rigidbody2D>().velocity.y == 0)
 			{
-				//movement += new Vector2(0,200);
+				//movement += Vector2.up;
+				humanHasJump = true;
+				//movement += new Vector2(0, movementAcceleration);
 				Debug.Log("jump");
 				//humanRB.MovePosition
 				//humanGO.transform.Translate(new Vector3(0, 5));
@@ -49,21 +61,38 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+		if (movement.x > -movementSpeedCap && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
 		{
-			movement += Vector2.left;
+			//movement += Vector2.left;
+			movement += new Vector2(-movementAcceleration, 0);
 		}
-		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+		if (movement.x < movementSpeedCap && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)))
 		{
-			movement += Vector2.right;
+			//movement += Vector2.right;
 			//sr.flipX = !sr.flipX;
+			movement += new Vector2(movementAcceleration, 0);
+		}
 
+		// Account Lerp Jump
+		if (humanHasJump)
+        {
+			if (humanJumpY <= humanJumpCap)
+			{
+				humanJumpY += movementSpeed * Time.deltaTime;
+				movement += new Vector2(0, humanJumpY);
+			}
+            else
+            {
+				humanHasJump = false;
+				humanJumpY = 0;
+			}
 		}
 
 		if (movement != Vector2.zero)
 		{
-			movement.Normalize();
-			movement = movementSpeed * Time.deltaTime * movement;
+			//movement.Normalize();
+			//movement = movementSpeed * Time.deltaTime * movement;
+			movement = Vector2.Lerp(movement, Vector2.zero, movementSpeed * Time.deltaTime);
 			if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
 			{
 				humanRB.MovePosition(humanRB.position + movement);
