@@ -15,19 +15,19 @@ public class PlayerMovement : MonoBehaviour
 		//this.GetComponent<PlayerStates>().currentPlayerState;
 	}
 
-    private void Start()
-    {
+	private void Start()
+	{
 		humanRB = humanGO.GetComponent<Rigidbody2D>();
 		ghostRB = ghostGO.GetComponent<Rigidbody2D>();
 	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
 	{
 		isJumpable = humanGO.GetComponent<HumanController>().jumpable;
 		Vector2 movement = Vector2.zero;
-		if(this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
-        {
+		if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
+		{
 			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 			{
 				movement += Vector2.up;
@@ -38,16 +38,16 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 		else
-        {
+		{
 			if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)) && isJumpable)
-            {
+			{
 				//movement += new Vector2(0,200);
 				Debug.Log("jump");
 				//humanRB.MovePosition
 				//humanGO.transform.Translate(new Vector3(0, 5));
 
 			}
-        }
+		}
 
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
