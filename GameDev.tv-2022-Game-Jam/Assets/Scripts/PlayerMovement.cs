@@ -5,17 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	// public SpriteRenderer sr;
-	public GameObject humanGO, ghostGO;
+	public GameObject humanGO, humanOC, ghostGO; //GO: Game Object | OC: Offset Collider Game Object
 	private Rigidbody2D humanRB, ghostRB;
-	private bool isJumpable;
-	[SerializeField] Vector2 movement = Vector2.zero;
-	[SerializeField] private float movementAcceleration = 0.001f ;
-	[SerializeField] private float movementSpeedCap = 1.0f ;
-	[SerializeField] public float movementSpeed = 2.0f;
 
-	[SerializeField] private float humanJumpY = 0.0f;
-	[SerializeField] private bool humanHasJump = false;
-	[SerializeField] private float humanJumpCap = 1.0f;
+	[SerializeField] private float hsp;	// Horizontal Speed
+	[SerializeField] private float vsp;	// Vertical Speed
+	[SerializeField] private float jmpForce;//Jump Force
 
 	void Awake()
 	{
@@ -31,81 +26,33 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		isJumpable = humanGO.GetComponent<HumanController>().jumpable;
-		//movement = Vector2.zero;
-		
-		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost)
-		{
-			if (movement.y < movementSpeedCap && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
-			{
-				movement += new Vector2(0, movementAcceleration);
-				//movement += Vector2.up;
-			}
-			if (movement.y > -movementSpeedCap && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
-			{
-				movement += new Vector2(0, -movementAcceleration);
-				//movement += Vector2.down;
-			}
-		}
-		else
-		{
-			if (!humanHasJump && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && humanGO.GetComponent<Rigidbody2D>().velocity.y == 0)
-			{
-				//movement += Vector2.up;
-				humanHasJump = true;
-				//movement += new Vector2(0, movementAcceleration);
-				Debug.Log("jump");
-				//humanRB.MovePosition
-				//humanGO.transform.Translate(new Vector3(0, 5));
+		bool moveLeft = (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A));
+		bool moveRight = (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D));
+		bool moveDown = (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S));
+		bool moveUp = (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space));
 
-			}
-		}
+		// Get Directions
+		int horizontalDir = (moveLeft ? -1 : 0);
+		horizontalDir += (moveRight ? 1 : horizontalDir);
+		int verticalDir = (moveDown && GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost ? -1 : 0);
+		verticalDir += (moveUp ? 1 : 0);
 
-		if (movement.x > -movementSpeedCap && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
-		{
-			//movement += Vector2.left;
-			movement += new Vector2(-movementAcceleration, 0);
-		}
-		if (movement.x < movementSpeedCap && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)))
-		{
-			//movement += Vector2.right;
-			//sr.flipX = !sr.flipX;
-			movement += new Vector2(movementAcceleration, 0);
-		}
-
-		// Account Lerp Jump
-		if (humanHasJump)
-        {
-			if (humanJumpY <= humanJumpCap)
-			{
-				humanJumpY += movementSpeed * Time.deltaTime;
-				movement += new Vector2(0, humanJumpY);
-			}
-            else
-            {
-				humanHasJump = false;
-				humanJumpY = 0;
-			}
-		}
-
-		if (movement != Vector2.zero)
-		{
-			//movement.Normalize();
-			//movement = movementSpeed * Time.deltaTime * movement;
-			movement = Vector2.Lerp(movement, Vector2.zero, movementSpeed * Time.deltaTime);
-			if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human)
-			{
-				humanRB.MovePosition(humanRB.position + movement);
-			}
-			if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost)
-			{
-				ghostRB.MovePosition(ghostRB.position + movement);
-			}
-		}
-
+		// Calculate Movement based on Directions
 		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human)
 		{
-			ghostGO.transform.position = humanGO.transform.position;
+			// Check if can jump
+			if (humanOC.GetComponent<ColliderOffset>().isTriggered && moveUp)
+				humanRB.AddForce(new Vector2(0, jmpForce));
+			float movementHumanx = humanGO.transform.localPosition.x + horizontalDir * hsp * Time.deltaTime;
+			float movementHumany = humanGO.transform.localPosition.y;
+			humanGO.transform.localPosition = new Vector2(movementHumanx, movementHumany);
+			ghostGO.transform.localPosition = humanGO.transform.localPosition;
+		}
+		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost)
+		{
+			float movementGhostx = ghostGO.transform.localPosition.x + horizontalDir * hsp * Time.deltaTime;
+			float movementGhosty = ghostGO.transform.localPosition.y + verticalDir * vsp * Time.deltaTime;
+			ghostGO.transform.localPosition = new Vector2(movementGhostx, movementGhosty);
 		}
 	}
 }

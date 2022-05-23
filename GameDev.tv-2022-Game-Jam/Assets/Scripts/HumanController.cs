@@ -5,7 +5,7 @@ using UnityEngine;
 public class HumanController : MonoBehaviour
 {
 	[SerializeField] public GameObject playerHandler;
-	[HideInInspector] public bool jumpable = true;
+	
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -37,11 +37,12 @@ public class HumanController : MonoBehaviour
 			}
 
 		}
-		//Jump
-		if (collision.gameObject.CompareTag("Platforms") || collision.gameObject.CompareTag("Solid Platforms"))
-		{
-			jumpable = true;
-		}
+		////Jump
+		//if (collision.gameObject.CompareTag("Platforms") || collision.gameObject.CompareTag("Solid Platforms"))
+		//{
+		//	//playerHandler.GetComponent<PlayerMovement>().canJmp = 1;
+		//	Debug.Log("WW");
+		//}
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
@@ -49,5 +50,9 @@ public class HumanController : MonoBehaviour
 		//{
 		//	jumpable = false;
 		//}
+		if (collision.gameObject.CompareTag("Platforms") || collision.gameObject.CompareTag("Solid Platforms"))
+		{
+			//playerHandler.GetComponent<PlayerMovement>().canJmp = 0;
+		}
 	}
 }
