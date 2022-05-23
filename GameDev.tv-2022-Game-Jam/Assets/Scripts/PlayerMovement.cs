@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 		isJumpable = humanGO.GetComponent<HumanController>().jumpable;
 		//movement = Vector2.zero;
 		
-		if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
+		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost)
 		{
 			if (movement.y < movementSpeedCap && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
 			{
@@ -93,17 +93,17 @@ public class PlayerMovement : MonoBehaviour
 			//movement.Normalize();
 			//movement = movementSpeed * Time.deltaTime * movement;
 			movement = Vector2.Lerp(movement, Vector2.zero, movementSpeed * Time.deltaTime);
-			if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
+			if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human)
 			{
 				humanRB.MovePosition(humanRB.position + movement);
 			}
-			if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Ghost)
+			if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost)
 			{
 				ghostRB.MovePosition(ghostRB.position + movement);
 			}
 		}
 
-		if (this.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
+		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human)
 		{
 			ghostGO.transform.position = humanGO.transform.position;
 		}

@@ -18,10 +18,10 @@ public class HumanController : MonoBehaviour
 
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnTriggerStay2D(Collider2D collision)
 	{
 		//If human form
-		if (playerHandler.GetComponent<PlayerStates>().currentPlayerState == PlayerStates.PlayerExistence.Human)
+		if (playerHandler.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human)
 		{
 			// Win Game [ONLY in Human Form AND TheOverseer exists]
 			if (playerHandler.GetComponent<PlayerStates>().list_Win.Contains(collision.tag) && playerHandler.GetComponent<PlayerStates>().theOverseer != null)
