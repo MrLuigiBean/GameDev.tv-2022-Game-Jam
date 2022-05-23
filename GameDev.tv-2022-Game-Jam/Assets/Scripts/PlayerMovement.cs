@@ -8,13 +8,23 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject humanGO, humanOC, ghostGO; //GO: Game Object | OC: Offset Collider Game Object
 	private Rigidbody2D humanRB, ghostRB;
 
-	[SerializeField] private float hsp;	// Horizontal Speed
-	[SerializeField] private float vsp;	// Vertical Speed
+	[SerializeField] private float hsp; // Horizontal Speed
+	[SerializeField] private float vsp; // Vertical Speed
 	[SerializeField] private float jmpForce;//Jump Force
 
-	void Awake()
+	// void Awake()
+	// {
+	//this.GetComponent<PlayerStates>().currentPlayerState;
+	// }
+
+	bool PlayerIsHuman()
 	{
-		//this.GetComponent<PlayerStates>().currentPlayerState;
+		return GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human;
+	}
+
+	bool PlayerIsGhost()
+	{
+		return GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost;
 	}
 
 	private void Start()
@@ -26,19 +36,19 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		bool moveLeft = (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A));
-		bool moveRight = (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D));
-		bool moveDown = (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S));
-		bool moveUp = (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space));
+		bool moveLeft = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+		bool moveRight = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+		bool moveDown = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
+		bool moveUp = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
 
 		// Get Directions
-		int horizontalDir = (moveLeft ? -1 : 0);
-		horizontalDir += (moveRight ? 1 : horizontalDir);
-		int verticalDir = (moveDown && GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost ? -1 : 0);
-		verticalDir += (moveUp ? 1 : 0);
+		int horizontalDir = moveLeft ? -1 : 0;
+		horizontalDir += moveRight ? 1 : 0;
+		int verticalDir = moveDown && GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost ? -1 : 0;
+		verticalDir += moveUp ? 1 : 0;
 
 		// Calculate Movement based on Directions
-		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human)
+		if (PlayerIsHuman())
 		{
 			// Check if can jump
 			if (humanOC.GetComponent<ColliderOffset>().isTriggered && moveUp)
@@ -48,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 			humanGO.transform.localPosition = new Vector2(movementHumanx, movementHumany);
 			ghostGO.transform.localPosition = humanGO.transform.localPosition;
 		}
-		if (this.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost)
+		if (PlayerIsGhost())
 		{
 			float movementGhostx = ghostGO.transform.localPosition.x + horizontalDir * hsp * Time.deltaTime;
 			float movementGhosty = ghostGO.transform.localPosition.y + verticalDir * vsp * Time.deltaTime;

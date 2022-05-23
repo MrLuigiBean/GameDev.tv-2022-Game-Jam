@@ -22,7 +22,6 @@ public class PlayerStates : MonoBehaviour
 	[Header("Game Object Reference")]
 	public GameObject human, ghost;
 
-
 	public PlayerExistence GetPlayerState()
 	{
 		return currentPlayerState;
@@ -73,6 +72,9 @@ public class PlayerStates : MonoBehaviour
 			case PlayerExistence.Ghost:
 				ghost.SetActive(true);
 				break;
+			default:
+				Debug.Log("INVALID PLAYER STATE! (Neither Ghost nor Human)");
+				break;
 		}
 	}
 
@@ -88,7 +90,7 @@ public class PlayerStates : MonoBehaviour
 		{
 			// Make all red gates passable for human, not ghost
 			if (GO.GetComponent<BoxCollider2D>())
-				GO.GetComponent<BoxCollider2D>().isTrigger = (existence == PlayerExistence.Human);
+				GO.GetComponent<BoxCollider2D>().isTrigger = existence == PlayerExistence.Human;
 		}
 
 		// Change Passable for Ghost
@@ -98,7 +100,7 @@ public class PlayerStates : MonoBehaviour
 		{
 			// Make all green gates passable for ghost, not human
 			if (GO.GetComponent<BoxCollider2D>())
-				GO.GetComponent<BoxCollider2D>().isTrigger = (existence == PlayerExistence.Ghost);
+				GO.GetComponent<BoxCollider2D>().isTrigger = existence == PlayerExistence.Ghost;
 		}
 	}
 }

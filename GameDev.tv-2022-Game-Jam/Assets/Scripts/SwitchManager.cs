@@ -18,19 +18,16 @@ public class SwitchManager : MonoBehaviour
 	//}
 
 	// Update is called once per frame
-	void Update()
-	{
-		;
-	}
+	// void Update()
+	// {
+	// 	;
+	// }
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
 		{
 			isPressed = true;
-
-			Debug.Log("we made it!");
-
 			// Activate Device
 			if (connectedDevice.GetComponent<GateDeviceBehaviour>())
 				connectedDevice.GetComponent<GateDeviceBehaviour>().ToggleGate();

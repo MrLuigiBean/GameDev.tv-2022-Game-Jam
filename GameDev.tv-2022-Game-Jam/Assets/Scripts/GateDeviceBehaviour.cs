@@ -52,12 +52,12 @@ public class GateDeviceBehaviour : MonoBehaviour
 			if (gateType == GateTypes.Red)
 			{
 				gateObject = Instantiate(redGatePrefab, transform.position + gateDistance, transform.rotation, transform);
-				gateObject.GetComponent<BoxCollider2D>().isTrigger = (playerHandler.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human);
+				gateObject.GetComponent<BoxCollider2D>().isTrigger = playerHandler.GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Human;
 			}
 			else if (gateType == GateTypes.Green)
 			{
 				gateObject = Instantiate(greenGatePrefab, transform.position + gateDistance, transform.rotation, transform);
-				gateObject.GetComponent<BoxCollider2D>().isTrigger = (playerHandler.GetComponent<PlayerStates>().GetPlayerState() != PlayerStates.PlayerExistence.Human);
+				gateObject.GetComponent<BoxCollider2D>().isTrigger = playerHandler.GetComponent<PlayerStates>().GetPlayerState() != PlayerStates.PlayerExistence.Human;
 			}
 
 			gateObject.transform.localScale = gateScale;
