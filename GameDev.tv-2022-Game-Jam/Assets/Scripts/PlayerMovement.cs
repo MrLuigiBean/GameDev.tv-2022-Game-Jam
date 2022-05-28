@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	// public SpriteRenderer sr;
-	public GameObject humanGO, humanOC, ghostGO; //GO: Game Object | OC: Offset Collider Game Object
+	public GameObject humanGO, humanOCB, humanOCL, humanOCR, ghostGO; //GO: Game Object | OC: Offset Collider Game Object
 	private Rigidbody2D humanRB, ghostRB;
 
 	[SerializeField] private float hsp; // Horizontal Speed
 	[SerializeField] private float vsp; // Vertical Speed
+	[SerializeField] private float grv; // Vertical Speed
 	[SerializeField] private float jmpForce;//Jump Force
 
 	// void Awake()
@@ -51,10 +52,16 @@ public class PlayerMovement : MonoBehaviour
 		if (PlayerIsHuman())
 		{
 			// Check if can jump
-			if (humanOC.GetComponent<ColliderOffset>().isTriggered && moveUp)
+			if (humanOCB.GetComponent<ColliderOffset>().isTriggered && moveUp)
 				humanRB.velocity = new Vector2(humanRB.velocity.x, jmpForce);
 			// Set velocity based on direction
 			humanRB.velocity = new Vector2(horizontalDir * hsp, humanRB.velocity.y);
+			// Check if colliding with a wall horizontally
+			if (humanOCL.GetComponent<ColliderOffset>().isTriggered && horizontalDir == -1)
+				humanRB.velocity = new Vector2(0, humanRB.velocity.y);
+			if (humanOCR.GetComponent<ColliderOffset>().isTriggered && horizontalDir == 1)
+				humanRB.velocity = new Vector2(0, humanRB.velocity.y);
+
 			// Move ghost to human
 			ghostGO.transform.localPosition = humanGO.transform.localPosition;
 		}

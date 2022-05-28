@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColliderOffset : MonoBehaviour
 {
 	// This script exists because we cant have two box collider2d in one object and it does not allow us to reference OnTriggerEnter until explicitly declared
+	// This script also exists because there is no such thing as Sweeptest for Unity2D Engine
 
 	public bool isTriggered = false;
 	public List<string> list_Collision_Type;
