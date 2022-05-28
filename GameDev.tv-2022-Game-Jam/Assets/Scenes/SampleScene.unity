@@ -1393,8 +1393,8 @@ MonoBehaviour:
   humanOC: {fileID: 753101423}
   ghostGO: {fileID: 317521655}
   hsp: 5
-  vsp: 9
-  jmpForce: 300
+  vsp: 5
+  jmpForce: 20
 --- !u!4 &1526875711
 Transform:
   m_ObjectHideFlags: 0

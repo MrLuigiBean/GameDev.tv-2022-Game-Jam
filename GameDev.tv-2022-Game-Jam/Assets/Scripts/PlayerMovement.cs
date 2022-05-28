@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 		// Get Directions
 		int horizontalDir = moveLeft ? -1 : 0;
 		horizontalDir += moveRight ? 1 : 0;
-		int verticalDir = moveDown && GetComponent<PlayerStates>().GetPlayerState() == PlayerStates.PlayerExistence.Ghost ? -1 : 0;
+		int verticalDir = moveDown && PlayerIsGhost() ? -1 : 0;
 		verticalDir += moveUp ? 1 : 0;
 
 		// Calculate Movement based on Directions
@@ -52,17 +52,16 @@ public class PlayerMovement : MonoBehaviour
 		{
 			// Check if can jump
 			if (humanOC.GetComponent<ColliderOffset>().isTriggered && moveUp)
-				humanRB.AddForce(new Vector2(0, jmpForce));
-			float movementHumanx = humanGO.transform.localPosition.x + horizontalDir * hsp * Time.deltaTime;
-			float movementHumany = humanGO.transform.localPosition.y;
-			humanGO.transform.localPosition = new Vector2(movementHumanx, movementHumany);
+				humanRB.velocity = new Vector2(humanRB.velocity.x, jmpForce);
+			// Set velocity based on direction
+			humanRB.velocity = new Vector2(horizontalDir * hsp, humanRB.velocity.y);
+			// Move ghost to human
 			ghostGO.transform.localPosition = humanGO.transform.localPosition;
 		}
 		if (PlayerIsGhost())
 		{
-			float movementGhostx = ghostGO.transform.localPosition.x + horizontalDir * hsp * Time.deltaTime;
-			float movementGhosty = ghostGO.transform.localPosition.y + verticalDir * vsp * Time.deltaTime;
-			ghostGO.transform.localPosition = new Vector2(movementGhostx, movementGhosty);
+			// Set velocity based on direction
+			ghostRB.velocity = new Vector2(horizontalDir * hsp, verticalDir * vsp);
 		}
 	}
 }
