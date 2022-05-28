@@ -83,6 +83,13 @@ public class PlayerStates : MonoBehaviour
 	{
 		currentPlayerState = existence;
 
+		// Add some jump force if the human just died
+		if (existence == PlayerExistence.Ghost)
+        {
+			int dir = (Random.Range(0, 2) == 0 ? 1 : -1);
+			human.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * Random.Range(100, 150), 200));
+		}
+
 		// Change Passable for Human
 		// Red Gate
 		GameObject[] allRedGates = GameObject.FindGameObjectsWithTag("Red Gate");

@@ -887,6 +887,14 @@ PrefabInstance:
       propertyPath: list_Collision_Type.Array.data[1]
       value: Solid Platforms
       objectReference: {fileID: 0}
+    - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
+      propertyPath: list_Collision_Type.Array.data[2]
+      value: Red Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
+      propertyPath: list_Collision_Type.Array.data[3]
+      value: Green Gate
+      objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836130, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1489,7 +1497,6 @@ MonoBehaviour:
   ghostGO: {fileID: 317521655}
   hsp: 5
   vsp: 5
-  grv: -2
   jmpForce: 20
 --- !u!4 &1526875711
 Transform:
@@ -1733,6 +1740,14 @@ PrefabInstance:
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[1]
       value: Solid Platforms
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
+      propertyPath: list_Collision_Type.Array.data[2]
+      value: Red Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
+      propertyPath: list_Collision_Type.Array.data[3]
+      value: Green Gate
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836130, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: m_RootOrder
@@ -2755,6 +2770,14 @@ PrefabInstance:
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[1]
       value: Solid Platforms
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
+      propertyPath: list_Collision_Type.Array.data[2]
+      value: Red Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
+      propertyPath: list_Collision_Type.Array.data[3]
+      value: Green Gate
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836130, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: m_RootOrder

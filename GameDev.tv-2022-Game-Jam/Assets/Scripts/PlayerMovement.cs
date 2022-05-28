@@ -10,13 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
 	[SerializeField] private float hsp; // Horizontal Speed
 	[SerializeField] private float vsp; // Vertical Speed
-	[SerializeField] private float grv; // Vertical Speed
 	[SerializeField] private float jmpForce;//Jump Force
-
-	// void Awake()
-	// {
-	//this.GetComponent<PlayerStates>().currentPlayerState;
-	// }
 
 	bool PlayerIsHuman()
 	{

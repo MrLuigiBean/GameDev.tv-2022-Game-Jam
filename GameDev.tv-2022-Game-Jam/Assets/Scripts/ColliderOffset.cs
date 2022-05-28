@@ -10,17 +10,6 @@ public class ColliderOffset : MonoBehaviour
 	public bool isTriggered = false;
 	public List<string> list_Collision_Type;
 
-	// Start is called before the first frame update
-	// void Start()
-	// {
-
-	// }
-
-	// Update is called once per frame
-	// void Update()
-	// {
-
-	// }
 	private void OnTriggerStay2D(Collider2D collision)
 	{
 		if ((list_Collision_Type.Count > 0) && list_Collision_Type.Contains(collision.tag))
