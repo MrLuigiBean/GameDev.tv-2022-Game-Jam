@@ -877,7 +877,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[0]
@@ -889,7 +889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[2]
-      value: Red Gate
+      value: Green Gate
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[3]
@@ -1731,7 +1731,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[0]
@@ -1743,7 +1743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[2]
-      value: Red Gate
+      value: Green Gate
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[3]
@@ -2761,7 +2761,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[0]
@@ -2773,7 +2773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[2]
-      value: Red Gate
+      value: Green Gate
       objectReference: {fileID: 0}
     - target: {fileID: 5618184852856836128, guid: 7d660386106c9f747b31db18b7150f5f, type: 3}
       propertyPath: list_Collision_Type.Array.data[3]
